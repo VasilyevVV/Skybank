@@ -8,6 +8,5 @@ def filter_by_state(list_of_dicts: list, acc_state="EXECUTED") -> list:
 
 def sort_by_date(list_of_dicts: list, revers=True) -> list:
     """функция принимает список словарей и возвращает список, отсортированный по дате"""
-    acc_sorted_list = []
-
+    acc_sorted_list = sorted(list_of_dicts, key=lambda account: account.get("date"), reverse=revers)
     return acc_sorted_list
