@@ -74,7 +74,7 @@ def test_epmty_account_number():
 
 
 # Тест на длину номера счёта - не менее 20 цифр
-@pytest.mark.parametrize("account", [(7365), ("48430155"), (00), ("00000")])
+@pytest.mark.parametrize("account", [(7365), ("48430155"), (00), ("010806")])
 def test_short_account_number(account):
     with pytest.raises(ValueError) as exc_info:
         get_mask_account(account)

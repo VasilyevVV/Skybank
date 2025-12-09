@@ -20,7 +20,7 @@ def get_mask_account(account_number: int | str) -> str:
         if len(account_number) == 0:  # если строка пустая
             raise ValueError("Пустой номер счёта")
         elif not account_number.isdigit():  # если строка с номером счёта не только из цифр
-            raise ValueError("Номер счёта должен состоять только из цифра")
+            raise ValueError("Номер счёта должен состоять только из цифр")
     # если номер счёта меньше 20 цифр
     if len(str(account_number)) < 20:
         raise ValueError("Номер счёта должен быть не менее 20 цифр")
