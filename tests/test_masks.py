@@ -3,7 +3,8 @@ import pytest
 from src.masks import get_mask_account, get_mask_card_number
 
 
-# Тест на корректное преобразование с разными форматами: int, строка. Количество символов корректное, пробелы могут быть в разных местах.
+# Тест на корректное преобразование с разными форматами: int или строка.
+# Количество символов корректное, пробелы могут быть в разных местах.
 @pytest.mark.parametrize(
     "card_number, expected",
     [
@@ -23,17 +24,17 @@ def test_correct_card_mask(card_number, expected):
 def test_empty_card_mask():
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number("")
-        assert str(exc_info.value) == "Пустой номер карты"
+        str(exc_info.value) == "Пустой номер карты"
 
 
-# Тест некорректной длины номера карты:больше или меньше 16 символов
+# Тест некорректной длины номера карты: больше или меньше 16 символов
 @pytest.mark.parametrize(
     "card_number", [(2507), ("2200 79 5182"), (123456789789952375287), ("12345678901234567891234")]
 )
 def test_incorrect_card_number_length(card_number):
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number(card_number)
-        assert str(exc_info.value) == "Некорректный номер карты"
+        str(exc_info.value) == "Некорректный номер карты"
 
 
 # Тест на наличие символлов, отличных от цифр
@@ -48,10 +49,12 @@ def test_incorrect_card_number_length(card_number):
 def test_card_invalid_characters(card_number, expected):
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number(card_number)
-        assert str(exc_info.value) == "Номер карты должен состоять только из цифр"
+        str(exc_info.value) == "Номер карты должен состоять только из цифр"
 
 
-### Тесты для функции get_mask_account ###
+# Тесты для функции get_mask_account #
+
+
 # Тест корректности маскирования номера счёта, с различной длиной счёта
 @pytest.mark.parametrize(
     "account, expected",
@@ -70,7 +73,7 @@ def test_correct_account_mask(account, expected):
 def test_epmty_account_number():
     with pytest.raises(ValueError) as exc_info:
         get_mask_account("")
-        assert str(exc_info.value) == "Пустой номер счёта"
+        str(exc_info.value) == "Пустой номер счёта"
 
 
 # Тест на длину номера счёта - не менее 20 цифр
@@ -78,12 +81,12 @@ def test_epmty_account_number():
 def test_short_account_number(account):
     with pytest.raises(ValueError) as exc_info:
         get_mask_account(account)
-        assert str(exc_info.value) == "Номер счёта должен быть не менее 20 цифр"
+        str(exc_info.value) == "Номер счёта должен быть не менее 20 цифр"
 
 
-# Тест на наличие прочих символов, кроме цифр
+# Тест на наличие в номере счёта не цифровых символов
 @pytest.mark.parametrize("account", [("7365.1084 301+584305"), ("4а108и017537430546502!"), ("77186,2834+17721896U3")])
 def test_account_invalid_characters(account):
     with pytest.raises(ValueError) as exc_info:
         get_mask_account(account)
-        assert str(exc_info.value) == "Номер счёта должен состоять только из цифр"
+        str(exc_info.value) == "Номер счёта должен состоять только из цифр"

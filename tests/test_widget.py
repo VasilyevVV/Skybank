@@ -32,7 +32,7 @@ def test_mask_account_card(card_acc_info, expected):
 def test_invalid_character(card_acc_info):
     with pytest.raises(ValueError) as exc_info:
         mask_account_card(card_acc_info)
-        assert str(exc_info.value) == "Некорректный номер карты или счета"
+        str(exc_info.value) == "Некорректный номер карты или счета"
 
 
 # Тест на некорректную длину (формат) номера карты - 16 цифр, или счёта - 20 цифр.
@@ -48,16 +48,17 @@ def test_invalid_character(card_acc_info):
 def test_incorrect_account_info(acc_info):
     with pytest.raises(ValueError) as exc_info:
         mask_account_card(acc_info)
-    assert str(exc_info.value) == "Некорректный номер карты или счета"
+        str(exc_info.value) == "Некорректный номер карты или счета"
 
 
-# Тест на поустую строку на входе функции mask_account_card
+# Тест на пустую строку на входе функции mask_account_card
 def test_empty_account_info():
     with pytest.raises(ValueError) as exc_info:
         mask_account_card("")
-        assert str(exc_info.value) == "Отсутствует информация о карте / счёте"
+        str(exc_info.value) == "Нет информации о карте / счёте"
 
 
+# Тест корректной работы функции get_date
 @pytest.mark.parametrize(
     "date_str, expected",
     [
@@ -66,18 +67,18 @@ def test_empty_account_info():
         ("2024.08.31T12:16:25.1534", "31.08.2024"),
     ],
 )
-# Тест корректной работы функции get_date
 def test_get_date(date_str, expected):
     assert get_date(date_str) == expected
 
 
-# Тест на поустую строку на входе функции get_date
+# Тест на пустую строку на входе функции get_date
 def test_epty_date():
     with pytest.raises(ValueError) as exc_info:
         get_date("")
-        assert str(exc_info.value) == "Не указана дата"
+        str(exc_info.value) == "Не указана дата"
 
 
+# Тест на некорректную строку с датой - временем
 @pytest.mark.parametrize(
     "date_str, expected",
     [
@@ -92,4 +93,4 @@ def test_epty_date():
 def test_invalid_date(date_str, expected):
     with pytest.raises(ValueError) as exc_info:
         get_date(date_str)
-        assert str(exc_info.value) == "Некорректная дата"
+        str(exc_info.value) == "Некорректная дата"

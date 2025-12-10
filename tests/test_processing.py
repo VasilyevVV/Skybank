@@ -15,9 +15,8 @@ def test_filter_by_state_cancel(input_dict_list, cancelled_dict_list):
 
 # Тест на пустой список словарей
 def test_empty_list():
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(ValueError):
         filter_by_state([])
-        assert str(exc_info.value) == "Нет данных"
 
 
 # Тест на отсутствие ключа state или на его некорректное (пустое) значение
@@ -25,7 +24,7 @@ def test_no_state(no_state_dict, result_no_state):
     assert filter_by_state(no_state_dict) == result_no_state
 
 
-# Тест на сортировку
+# Тест на корректность сортировки
 def test_sort_dy_date(input_dict_list, desc_sorted_list, ascending_sort_list):
     assert sort_by_date(input_dict_list) == desc_sorted_list
     assert sort_by_date(input_dict_list, revers=False) == ascending_sort_list
@@ -33,9 +32,8 @@ def test_sort_dy_date(input_dict_list, desc_sorted_list, ascending_sort_list):
 
 # Тест на пустой список словарей для сортировки по дате
 def test_empty_dict():
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(ValueError):
         sort_by_date([])
-        assert str(exc_info.value) == "Нет данных"
 
 
 # Тест на корректность сортировки при одинаковых датах
@@ -46,5 +44,5 @@ def test_equal_date(equal_date_list):
 
 # Тест на некорректныe форматs даты
 def test_invalid_date(sort_invalid_date_list, sorted_invalid_date_list):
-    with pytest.raises(ValueError) as exc_info:
-        assert sort_by_date(sort_invalid_date_list) == sorted_invalid_date_list
+    with pytest.raises(ValueError):
+        sort_by_date(sort_invalid_date_list) == sorted_invalid_date_list
