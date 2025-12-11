@@ -24,7 +24,8 @@ def test_correct_card_mask(card_number, expected):
 def test_empty_card_mask():
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number("")
-        str(exc_info.value) == "Пустой номер карты"
+
+    assert str(exc_info.value) == "Пустой номер карты"
 
 
 # Тест некорректной длины номера карты: больше или меньше 16 символов
@@ -34,7 +35,8 @@ def test_empty_card_mask():
 def test_incorrect_card_number_length(card_number):
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number(card_number)
-        str(exc_info.value) == "Некорректный номер карты"
+
+    assert str(exc_info.value) == "Некорректный номер карты"
 
 
 # Тест на наличие символлов, отличных от цифр
@@ -49,7 +51,8 @@ def test_incorrect_card_number_length(card_number):
 def test_card_invalid_characters(card_number, expected):
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number(card_number)
-        str(exc_info.value) == "Номер карты должен состоять только из цифр"
+
+    assert str(exc_info.value) == "Номер карты должен состоять только из цифр"
 
 
 # Тесты для функции get_mask_account #
@@ -73,7 +76,8 @@ def test_correct_account_mask(account, expected):
 def test_epmty_account_number():
     with pytest.raises(ValueError) as exc_info:
         get_mask_account("")
-        str(exc_info.value) == "Пустой номер счёта"
+
+    assert str(exc_info.value) == "Пустой номер счёта"
 
 
 # Тест на длину номера счёта - не менее 20 цифр
@@ -81,7 +85,8 @@ def test_epmty_account_number():
 def test_short_account_number(account):
     with pytest.raises(ValueError) as exc_info:
         get_mask_account(account)
-        str(exc_info.value) == "Номер счёта должен быть не менее 20 цифр"
+
+    assert str(exc_info.value) == "Номер счёта должен быть не менее 20 цифр"
 
 
 # Тест на наличие в номере счёта не цифровых символов
@@ -89,4 +94,5 @@ def test_short_account_number(account):
 def test_account_invalid_characters(account):
     with pytest.raises(ValueError) as exc_info:
         get_mask_account(account)
-        str(exc_info.value) == "Номер счёта должен состоять только из цифр"
+
+    assert str(exc_info.value) == "Номер счёта должен состоять только из цифр"

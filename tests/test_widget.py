@@ -30,9 +30,8 @@ def test_mask_account_card(card_acc_info, expected):
     ],
 )
 def test_invalid_character(card_acc_info):
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(ValueError):
         mask_account_card(card_acc_info)
-        str(exc_info.value) == "Некорректный номер карты или счета"
 
 
 # Тест на некорректную длину (формат) номера карты - 16 цифр, или счёта - 20 цифр.
@@ -48,14 +47,14 @@ def test_invalid_character(card_acc_info):
 def test_incorrect_account_info(acc_info):
     with pytest.raises(ValueError) as exc_info:
         mask_account_card(acc_info)
-        str(exc_info.value) == "Некорректный номер карты или счета"
 
 
 # Тест на пустую строку на входе функции mask_account_card
 def test_empty_account_info():
     with pytest.raises(ValueError) as exc_info:
         mask_account_card("")
-        str(exc_info.value) == "Нет информации о карте / счёте"
+
+    assert str(exc_info.value) == "Нет информации о карте / счёте"
 
 
 # Тест корректной работы функции get_date
@@ -75,7 +74,8 @@ def test_get_date(date_str, expected):
 def test_epty_date():
     with pytest.raises(ValueError) as exc_info:
         get_date("")
-        str(exc_info.value) == "Не указана дата"
+
+    assert str(exc_info.value) == "Не указана дата"
 
 
 # Тест на некорректную строку с датой - временем
@@ -93,4 +93,4 @@ def test_epty_date():
 def test_invalid_date(date_str, expected):
     with pytest.raises(ValueError) as exc_info:
         get_date(date_str)
-        str(exc_info.value) == "Некорректная дата"
+
