@@ -107,3 +107,127 @@ def sorted_invalid_date_list():
         {"id": 596226727, "state": "CANCELED", "date": "2024-09-12T21:27:25.241689"},
         {"id": 939719570, "state": "EXECUTED", "date": "2018-06-15T02:08:58.425572"},
     ]
+
+
+# Фикстуры для модуля generators
+# Фикстура для тестирования filter_by_currency и transaction_descriptions - список словарей с транзакциями
+@pytest.fixture
+def transaction_list():
+    return [
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 11776614605963066702",
+        },
+        {
+            "id": 142264268,
+            "state": "EXECUTED",
+            "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
+        },
+        {
+            "id": 915142746,
+            "state": "EXECUTED",
+            "date": "2025-07-22T15:00:10.206574",
+            "operationAmount": {"amount": "100000.00", "currency": {"name": "RUB", "code": "RUB"}},
+            "description": "Перевод с карты на карту",
+            "from": "Счет 48250000428972523791",
+            "to": "Счет 75651108381000108108",
+        },
+        {
+            "id": 286415217,
+            "state": "EXECUTED",
+            "date": "2025-10-27T09:12:46.547291",
+            "operationAmount": {"amount": "155000.00", "currency": {"name": "EUR", "code": "EUR"}},
+            "description": "Перевод между счетами",
+            "from": "Счет 48751008611657918424",
+            "to": "Счет 48771004605963020451",
+        },
+        {
+            "id": 746816925,
+            "state": "EXECUTED",
+            "date": "2025-11-04T17:02:50.654274",
+            "operationAmount": {"amount": "700000.00", "currency": {"name": "RUB", "code": "RUB"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 46002542891275228743",
+            "to": "Счет 78811081008108108108",
+        },
+        # В крайней транзакции отсуутствует ключ "description", по умолчанию присваивается "n/a"
+        {
+            "id": 461125253,
+            "state": "CANCELLED",
+            "date": "2024-01-12T10:05:22.564821",
+            "operationAmount": {"amount": "100.00", "currency": {"name": "CAN", "code": "CAN"}},
+            "from": "Счет 40007542921478218770",
+            "to": "Счет 58210001007508241908",
+        },
+    ]
+
+
+# Фикстура список usd-транзакций
+@pytest.fixture
+def usd_expected():
+    return [
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 11776614605963066702",
+        },
+        {
+            "id": 142264268,
+            "state": "EXECUTED",
+            "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
+        },
+    ]
+
+
+# Фикстура список RUB-транзакций
+@pytest.fixture
+def rub_expected():
+    return [
+        {
+            "id": 915142746,
+            "state": "EXECUTED",
+            "date": "2025-07-22T15:00:10.206574",
+            "operationAmount": {"amount": "100000.00", "currency": {"name": "RUB", "code": "RUB"}},
+            "description": "Перевод с карты на карту",
+            "from": "Счет 48250000428972523791",
+            "to": "Счет 75651108381000108108",
+        },
+        {
+            "id": 746816925,
+            "state": "EXECUTED",
+            "date": "2025-11-04T17:02:50.654274",
+            "operationAmount": {"amount": "700000.00", "currency": {"name": "RUB", "code": "RUB"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 46002542891275228743",
+            "to": "Счет 78811081008108108108",
+        },
+    ]
+
+
+# Фикстура - список с описанием транзакций
+@pytest.fixture
+def trans_descript_list():
+    return [
+        "Перевод организации",
+        "Перевод со счета на счет",
+        "Перевод с карты на карту",
+        "Перевод между счетами",
+        "Перевод со счета на счет",
+    ]

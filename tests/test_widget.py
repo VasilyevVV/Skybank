@@ -45,7 +45,7 @@ def test_invalid_character(card_acc_info):
     ],
 )
 def test_incorrect_account_info(acc_info):
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(ValueError):
         mask_account_card(acc_info)
 
 
@@ -91,6 +91,5 @@ def test_epty_date():
     ],
 )
 def test_invalid_date(date_str, expected):
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(ValueError):
         get_date(date_str)
-
