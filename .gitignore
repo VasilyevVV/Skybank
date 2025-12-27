@@ -181,3 +181,5 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 /.idea/
+/logs
+my_testlog.txt
