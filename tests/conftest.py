@@ -231,3 +231,136 @@ def trans_descript_list():
         "Перевод между счетами",
         "Перевод со счета на счет",
     ]
+
+
+# Фикстура - список транзакций, полученный из json-файла
+@pytest.fixture
+def transaction_list_from_json():
+    return [
+        {
+            "id": 441945886,
+            "state": "EXECUTED",
+            "date": "2019-08-26T10:50:58.294041",
+            "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
+            "description": "Перевод организации",
+            "from": "Maestro 1596837868705199",
+            "to": "Счет 64686473678894779589",
+        },
+        {
+            "id": 587085106,
+            "state": "EXECUTED",
+            "date": "2018-03-23T10:45:06.972075",
+            "operationAmount": {"amount": "48223.05", "currency": {"name": "руб.", "code": "RUB"}},
+            "description": "Открытие вклада",
+            "to": "Счет 41421565395219882431",
+        },
+    ]
+
+
+# Фикстура - словарь с транзакцией в "RUB"
+@pytest.fixture
+def transaction_dict_rub():
+    return {
+        "id": 45743855,
+        "state": "EXECUTED",
+        "date": "2025-05-02T10:50:00.291521",
+        "operationAmount": {"amount": "10808.80", "currency": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод организации",
+        "from": "Maestro 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+
+# Фикстура - словарь с транзакцией в неизвестной валюте (не в EUR или USD)
+@pytest.fixture
+def transaction_unknown():
+    return {
+        "id": 441945886,
+        "state": "CANCELLED",
+        "date": "2024-07-02T03:20:00.521621",
+        "operationAmount": {"amount": "7.80", "currency": {"name": "abc", "code": "ABC"}},
+        "description": "Перевод",
+        "from": "VISA 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+
+# Фикстура с некорректным ключом "operationAmount"
+@pytest.fixture
+def invalid_transaction_1():
+    return {
+        "id": 441975216,
+        "state": "EXECUTED",
+        "date": "2025-10-12T07:20:15.291521",
+        "operation": {"amount": "100.00", "currency": {"name": "руб.", "code": "EUR"}},
+        "description": "Перевод организации",
+        "from": "Maestro 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+
+# Фикстура с некорректным ключом "currency"
+@pytest.fixture
+def invalid_transaction_2():
+    return {
+        "id": 441975216,
+        "state": "EXECUTED",
+        "date": "2025-10-12T07:20:15.291521",
+        "operationAmount": {"amount": "10808.80", "curr": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод организации",
+        "from": "Maestro 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+
+# Фикстура с некорректным ключом "code"
+@pytest.fixture
+def invalid_transaction_3():
+    return {
+        "id": 441945886,
+        "state": "EXECUTED",
+        "date": "2025-03-27T11:55:14.915214",
+        "operationAmount": {"amount": "10.00", "currency": {"name": "руб.", "cod": "USD"}},
+        "description": "Перевод организации",
+        "from": "Maestro 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+
+# Фикстура с пустым значением валюты - "code" ("")
+@pytest.fixture
+def blank_code_transaction():
+    return {
+        "id": 441945886,
+        "state": "EXECUTED",
+        "date": "2024-01-02T05:57:10.152146",
+        "operationAmount": {"amount": "80.80", "currency": {"name": "руб.", "code": ""}},
+        "description": "Перевод со счета на счет",
+        "from": "Visa GOLD 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+
+@pytest.fixture
+def unknown_tx_currency():
+    return {
+        "id": 441945886,
+        "state": "CANCELLED",
+        "date": "2024-07-02T03:20:00.521621",
+        "operationAmount": {"amount": "7.80", "currency": {"name": "abc", "code": "ABC"}},
+        "description": "Перевод",
+        "from": "VISA 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
+
+
+# Фикстура - результат успешного запроса к сервису конвертации
+@pytest.fixture
+def mock_responce():
+    return {
+        "success": True,
+        "query": {"from": "EUR", "to": "RUB", "amount": 100},
+        "info": {"timestamp": 1767870547, "rate": 93.88745},
+        "date": "2026-01-07",
+        "result": 938874.5,
+    }
