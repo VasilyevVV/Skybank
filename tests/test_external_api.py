@@ -1,7 +1,9 @@
-import pytest
 from unittest.mock import Mock, patch
+
+import pytest
 from requests import HTTPError
-from src.external_api import get_transaction_sum, get_exchange_rates, API_KEY
+
+from src.external_api import API_KEY, get_exchange_rates, get_transaction_sum
 
 
 # Проверка суммы транзакции в RUB. transaction_dict_rub, transaction_unknown - фикстуры-словари с транзакциями

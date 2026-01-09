@@ -1,7 +1,7 @@
-import requests
 import os
-from dotenv import load_dotenv
 
+import requests
+from dotenv import load_dotenv
 
 # Загрузка переменных из .env-файла
 load_dotenv()
@@ -44,9 +44,11 @@ def get_transaction_sum(transaction: dict) -> float:
 
 
 def get_exchange_rates(amount: float, currency: str) -> float:
-    """Функция обращения к сервису - внешнему API для получения текущего курса валют
-    и конвертации суммы операции в рубли, с использованием запроса к Exchange Rates Data API:
-    https://apilayer.com/exchangerates_data-api
+    """
+    Функция для получения суммы транзакции (в рублях) по текущему курсу.
+    Принимает на вход сумму транзакции и код валюты (EUR, USD) и обращается к сервису
+    Exchange Rates Data API: https://apilayer.com/exchangerates_data-api
+    для получения текущего курса валют и конвертации суммы операции в рубли
     """
     # Валюта, в которую следует конвертировать: RUB
     convert_to = "RUB"
