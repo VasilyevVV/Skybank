@@ -3,7 +3,7 @@ import pytest
 from src.masks import get_mask_account, get_mask_card_number
 
 
-# Тест на корректное преобразование с разными форматами: int или строка.
+# Тест на корректное преобразование номера карты с разными форматами: int или строка.
 # Количество символов корректное, пробелы могут быть в разных местах.
 @pytest.mark.parametrize(
     "card_number, expected",
@@ -56,7 +56,6 @@ def test_card_invalid_characters(card_number, expected):
 
 
 # Тесты для функции get_mask_account #
-
 
 # Тест корректности маскирования номера счёта, с различной длиной счёта
 @pytest.mark.parametrize(
