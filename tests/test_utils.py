@@ -5,12 +5,13 @@ from unittest.mock import mock_open, patch
 
 import pytest
 
-from src.utils import BASE_DIR, get_transaction_data
+from src.config import TEST_FILE_DIR
+from src.utils import get_transaction_data
 
 
 # Тест корректного чтения json-файла и получения списка словарей
 def test_get_transaction_list(transaction_list_from_json):
-    test_path = os.path.join(BASE_DIR, "tests", "test_operations.json")
+    test_path = os.path.join(TEST_FILE_DIR, "test_operations.json")
     assert get_transaction_data(test_path) == transaction_list_from_json
 
 
@@ -19,8 +20,8 @@ def test_get_transaction_list(transaction_list_from_json):
     [
         ("data/operation", []),
         ("", []),
-        ("tests/test_empty.json", []),
-        ("tests/test_no_json.json", []),
+        ("tests/test_data/test_empty.json", []),
+        ("tests/test_data/test_no_json.json", []),
     ],
 )
 def test_get_transaction_no_file(test_file_path, expected):

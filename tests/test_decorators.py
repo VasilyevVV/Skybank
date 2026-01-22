@@ -1,9 +1,14 @@
+import os
 from time import localtime, strftime, time
 
 import pytest
 
 from src import masks
+from src.config import BASE_DIR_PRO
 from src.decorators import log
+
+
+TEST_LOG_FILE = os.path.join(BASE_DIR_PRO, "logs", "my_testlog.txt")
 
 
 # Декоририуемая функция get_mask_card_number из модуля masks
@@ -13,7 +18,7 @@ def masked_card(cardnumber: str):
 
 
 # Декоририуемая функция get_mask_account из модуля masks
-@log("my_testlog.txt")
+@log(TEST_LOG_FILE)
 def masked_info(account: str):
     return masks.get_mask_account(account)
 
@@ -48,7 +53,7 @@ def test_logging_to_file():
     start = strftime("%Y-%m-%d %H:%M:%S", localtime(time()))
     masked_info("41084301753743059521")
     stop = strftime("%Y-%m-%d %H:%M:%S", localtime(time()))
-    with open("my_testlog.txt", "r", encoding="utf-8") as file:
+    with open(TEST_LOG_FILE, "r", encoding="utf-8") as file:
         full_log = file.readlines()
         log_str = full_log[-1]
         assert log_str == f"Функция: masked_info: OK. Старт: {str(start)} Стоп: {str(stop)}.\n"
@@ -65,7 +70,7 @@ def test_logging_to_file():
 )
 def test_error_log_to_file(account_data, expected):
     masked_info(account_data)
-    with open("my_testlog.txt", "r", encoding="utf-8") as file:
+    with open(TEST_LOG_FILE, "r", encoding="utf-8") as file:
         full_log = file.readlines()
         log_str = full_log[-1]
         assert log_str == expected

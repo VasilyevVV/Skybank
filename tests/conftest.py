@@ -364,3 +364,94 @@ def mock_responce():
         "date": "2026-01-07",
         "result": 938874.5,
     }
+
+
+# Фикстура - результат успешного чтения csv-файла - список словарей
+@pytest.fixture
+def dict_list_csv():
+    return [
+        {
+            "id": "650703",
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": "16210",
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Перевод организации",
+        },
+        {
+            "id": "4234093",
+            "state": "EXECUTED",
+            "date": "2021-07-08T07:31:21Z",
+            "amount": "23182",
+            "currency_name": "Ruble",
+            "currency_code": "RUB",
+            "from": "Visa 0773092093872450",
+            "to": "Discover 8602781449570491",
+            "description": "Перевод с карты на карту",
+        },
+        {
+            "id": "3107343",
+            "state": "EXECUTED",
+            "date": "2023-01-25T13:33:00Z",
+            "amount": "33639",
+            "currency_name": "Krona",
+            "currency_code": "SEK",
+            "from": "",
+            "to": "Счет 35662766798195077538",
+            "description": "Открытие вклада",
+        },
+    ]
+
+
+# Фикстура - результат успешного чтения Excel-файла - список словарей
+@pytest.fixture
+def dict_list_excel():
+    return [
+        {
+            "id": 1962667,
+            "state": "EXECUTED",
+            "date": "2023-10-22T09:43:32Z",
+            "amount": 18588,
+            "currency_name": "Peso",
+            "currency_code": "COP",
+            "from": "Mastercard 7286844946221431",
+            "to": "Счет 76145988629288763144",
+            "description": "Перевод организации",
+        },
+        {
+            "id": 5294458,
+            "state": "EXECUTED",
+            "date": "2022-06-20T18:08:20Z",
+            "amount": 16836,
+            "currency_name": "Yuan Renminbi",
+            "currency_code": "CNY",
+            "from": "Visa 2759011965877198",
+            "to": "Счет 38287443300766991082",
+            "description": "Перевод с карты на карту",
+        },
+        {
+            "id": 3226899,
+            "state": "EXECUTED",
+            "date": "2023-04-17T09:21:15Z",
+            "amount": 21680,
+            "currency_name": "Koruna",
+            "currency_code": "CZK",
+            "from": "",
+            "to": "Счет 88329674734590848775",
+            "description": "Открытие вклада",
+        },
+        {
+            "id": 4234093,
+            "state": "EXECUTED",
+            "date": "2021-07-08T07:31:21Z",
+            "amount": 23182,
+            "currency_name": "Ruble",
+            "currency_code": "RUB",
+            "from": "Visa 0773092093872450",
+            "to": "Discover 8602781449570491",
+            "description": "Перевод с карты на карту",
+        },
+    ]

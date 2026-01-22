@@ -3,11 +3,10 @@ import logging
 import os
 from json import JSONDecodeError
 
-# Получаем абсолютный путь к корневой директории проекта (с учётом, чтомодуль находится в папке src)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from src.config import BASE_DIR_PRO
 
 # Путь к папке logs, находящейся на том же уровне, что и  папка с модулями src - в корне проекта
-log_path = os.path.join(BASE_DIR, "logs", "utils.log")
+log_path = os.path.join(BASE_DIR_PRO, "logs", "utils.log")
 
 
 # Создание логгера, хендлера и форматтера для логирования в файл, перезаписываемый при каждом запуске программы
