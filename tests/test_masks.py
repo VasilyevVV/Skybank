@@ -57,6 +57,7 @@ def test_card_invalid_characters(card_number, expected):
 
 # Тесты для функции get_mask_account #
 
+
 # Тест корректности маскирования номера счёта, с различной длиной счёта
 @pytest.mark.parametrize(
     "account, expected",
