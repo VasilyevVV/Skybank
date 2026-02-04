@@ -1,7 +1,7 @@
 import pytest
 
 
-# исходный список для проверки правильности отбора filter_by_state
+# Исходный список для проверки правильности отбора filter_by_state
 @pytest.fixture
 def input_dict_list():
     return [
@@ -12,7 +12,7 @@ def input_dict_list():
     ]
 
 
-# список для проверки отбора со статусом "EXECUTED"
+# Список для проверки отбора со статусом "EXECUTED"
 @pytest.fixture
 def executed_dict_list():
     return [
@@ -21,7 +21,7 @@ def executed_dict_list():
     ]
 
 
-# список для проверки отбора со статусом "CANCELED"
+# Список для проверки отбора со статусом "CANCELED"
 @pytest.fixture
 def cancelled_dict_list():
     return [
@@ -159,7 +159,7 @@ def transaction_list():
             "from": "Счет 46002542891275228743",
             "to": "Счет 78811081008108108108",
         },
-        # В крайней транзакции отсуутствует ключ "description", по умолчанию присваивается "n/a"
+        # В крайней транзакции отсутствует ключ "description", по умолчанию присваивается "n/a"
         {
             "id": 461125253,
             "state": "CANCELLED",
@@ -455,3 +455,59 @@ def dict_list_excel():
             "description": "Перевод с карты на карту",
         },
     ]
+
+
+# Фикстура для тестирования функции поиска операций по описанию.
+# Результат поиска по слову "Перевод"
+@pytest.fixture
+def list_operations():
+    return [
+        {
+            "id": "650703",
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": "16210",
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Перевод организации",
+        },
+        {
+            "id": "4234093",
+            "state": "EXECUTED",
+            "date": "2021-07-08T07:31:21Z",
+            "amount": "23182",
+            "currency_name": "Ruble",
+            "currency_code": "RUB",
+            "from": "Visa 0773092093872450",
+            "to": "Discover 8602781449570491",
+            "description": "Перевод с карты на карту",
+        },
+        {
+            "id": "3107343",
+            "state": "EXECUTED",
+            "date": "2023-01-25T13:33:00Z",
+            "amount": "33639",
+            "currency_name": "Krona",
+            "currency_code": "SEK",
+            "from": "",
+            "to": "Счет 35662766798195077538",
+            "description": "Открытие вклада",
+        }
+    ]
+
+
+@pytest.fixture
+def finded_json_list():
+    return [
+        {
+            "id": 441945886,
+            "state": "EXECUTED",
+            "date": "2019-08-26T10:50:58.294041",
+            "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
+            "description": "Перевод организации",
+            "from": "Maestro 1596837868705199",
+            "to": "Счет 64686473678894779589",
+        }
+        ]
