@@ -5,10 +5,10 @@ import pytest
 @pytest.fixture
 def input_dict_list():
     return [
-        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
-        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
-        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
-        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58"},
+        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25"},
+        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33"},
     ]
 
 
@@ -16,8 +16,8 @@ def input_dict_list():
 @pytest.fixture
 def executed_dict_list():
     return [
-        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
-        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58"},
     ]
 
 
@@ -25,8 +25,8 @@ def executed_dict_list():
 @pytest.fixture
 def cancelled_dict_list():
     return [
-        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
-        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
+        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25"},
+        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33"},
     ]
 
 
@@ -55,10 +55,10 @@ def result_no_state():
 @pytest.fixture
 def desc_sorted_list():
     return [
-        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
-        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
-        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
-        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29"},
+        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33"},
+        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58"},
     ]
 
 
@@ -66,10 +66,10 @@ def desc_sorted_list():
 @pytest.fixture
 def ascending_sort_list():
     return [
-        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
-        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
-        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
-        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58"},
+        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25"},
+        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33"},
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29"},
     ]
 
 
@@ -494,7 +494,7 @@ def list_operations():
             "from": "",
             "to": "Счет 35662766798195077538",
             "description": "Открытие вклада",
-        }
+        },
     ]
 
 
@@ -510,4 +510,4 @@ def finded_json_list():
             "from": "Maestro 1596837868705199",
             "to": "Счет 64686473678894779589",
         }
-        ]
+    ]

@@ -5,7 +5,7 @@ from json import JSONDecodeError
 
 from src.config import BASE_DIR_PRO
 
-# Путь к папке logs, находящейся на том же уровне, что и  папка с модулями src - в корне проекта
+# Путь к папке logs, находящейся на том же уровне, что и src - в корне проекта
 log_path = os.path.join(BASE_DIR_PRO, "logs", "utils.log")
 
 

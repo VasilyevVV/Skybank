@@ -4,52 +4,53 @@ from datetime import datetime
 
 
 def filter_by_state(dict_list: list[dict], acc_state: str = "EXECUTED") -> list[dict]:
-    """Функция принимает список словарей и значение ключа "state" (по умолчанию 'EXECUTED'
-    и возвращает список словарей, содержащий только словари c указанным ключом state"""
-
+    """Функция принимает список словарей и значение ключа "state" (по умолчанию "EXECUTED"
+    и возвращает список словарей, содержащий только словари c указанным ключом state
+    """
     # Если на вход функции передан пустой список словарей
     if dict_list == []:
         raise ValueError("Нет данных")
-
     # Если список на входе не пустой
     else:
         # Заполнение списка - фильтрация по указанному значению ключа "state"
-        account_list = [account for account in dict_list if account.get("state", "Unknown") == acc_state]
+        account_list = [
+            account for account in dict_list if account.get("state", "Unknown").lower() == acc_state.lower()
+        ]
     # Возвращаем результат - отфильтрованный список
     return account_list
 
 
 def sort_by_date(list_of_dicts: list[dict], revers: bool = True) -> list[dict]:
-    """Функция принимает список словарей и возвращает список словарей, отсортированный по дате"""
-
+    """
+    Функция принимает список словарей и необязательный параметр, задающий порядок сортировки (по умолчанию — убывание).
+    Возвращает список словарей, отсортированный по дате.
+    """
     # Если на вход передан пустой список словарей
     if list_of_dicts == []:
         raise ValueError("Нет данных")
     else:
         # Включение в список для сортировки только словарей с ключом "date" и с корректной длиной строки
-        list_before_sort = [
-            account for account in list_of_dicts if ("date" in account and len(account.get("date", "Unknown")) == 26)
-        ]
+        list_before_sort = [account for account in list_of_dicts if "date" in account]
         """
         Преобразование значений для ключа "date" из строки в объекты даты для корректной сортировки и заполнение списка
-        Дата должна быть указана строго в формате "ГГГГ-ММ-ДДТЧЧ:Мин:Сек.миксек", длина строки - 26 символов
+        Дата указывается в формате "ГГГГ-ММ-ДДТЧЧ:Мин:Сек"
         """
         # Создание списка словарей для сортировки с преобразованными значениями "date" в формат datetime
         list_to_sort = []
         for account_dict in list_before_sort:
             try:
                 # Преобразование строковых значений "date" в объекты даты для каждого словаря в списке
-                acc_date = datetime.strptime(account_dict.get("date", "Unknown"), "%Y-%m-%dT%H:%M:%S.%f")
+                acc_date = datetime.strptime(account_dict.get("date", "Unknown")[:19], "%Y-%m-%dT%H:%M:%S")
                 account_dict["date"] = acc_date
                 list_to_sort.append(account_dict)
             # Если преобразование завершается исключением ValueError
             except ValueError:
                 raise ValueError("Некорректный формат даты")
         # Сортировка списка словарей
-        acc_sorted_list = sorted(list_to_sort, key=lambda account: account.get("date"), reverse=revers)
+        acc_sorted_list = sorted(list_to_sort, key=lambda account: account["date"], reverse=revers)
         # Преобразование значений "date" - объектов datetime обратно в строку
         for acc_info in list_to_sort:
-            acc_info["date"] = datetime.strftime(acc_info["date"], "%Y-%m-%dT%H:%M:%S.%f")
+            acc_info["date"] = datetime.strftime(acc_info["date"], "%Y-%m-%dT%H:%M:%S")
     # Возвращаем отсортированный список с корректными датами
     return acc_sorted_list
 
@@ -81,10 +82,10 @@ def process_bank_operations(tx_data: list[dict], categories: list) -> dict:
     # Если список описаний операций "categories" пустой - возвращается пустой словарь
     if len(categories) == 0:
         return {}
-    # Составление списка всех категорий
-    description_list = [desc["description"] for desc in tx_data if desc["description"] in categories]
+    # Получение всех категорий - занчений поля "description"
+    descriptions = (one_tx.get("description") for one_tx in tx_data)
     # Подсчёт количества оперций по категориям и преобразование в словарь
-    result_dict = dict(Counter(description_list))
+    result_dict = dict(Counter(desc for desc in descriptions if desc in categories))
     # Получение отсортированного словаря на основе сортировки словаря по ключам (в т.ч. для тестирования)
     sorted_result = {k: result_dict[k] for k in sorted(result_dict)}
     return sorted_result
