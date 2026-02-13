@@ -5,7 +5,7 @@ from json import JSONDecodeError
 
 from src.config import BASE_DIR_PRO
 
-# Путь к папке logs, находящейся на том же уровне, что и  папка с модулями src - в корне проекта
+# Путь к папке logs, находящейся на том же уровне, что и src - в корне проекта
 log_path = os.path.join(BASE_DIR_PRO, "logs", "utils.log")
 
 
@@ -21,7 +21,7 @@ logger.addHandler(file_handler)
 def get_transaction_data(filepath: str) -> list[dict]:
     """
     Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях.
-    Если файл пустой, содержит не список или не найден, возвращает пустой список.
+    Если файл пустой, содержит не список или не найден - возвращает пустой список.
     """
     try:
         with open(filepath, "r", encoding="utf-8") as tx_file:

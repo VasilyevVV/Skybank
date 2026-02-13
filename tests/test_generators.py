@@ -31,7 +31,7 @@ def test_transaction_descriptions_2(transaction_list, trans_descript_list):
     assert [desc for desc in descriptions] == trans_descript_list
 
 
-# Teст функции transaction_descriptions, если на входе пустой список
+# Тест функции transaction_descriptions, если на входе пустой список
 def test_empty_transaction_descriptions(transaction_list):
     with pytest.raises(StopIteration):
         descr = transaction_descriptions([])

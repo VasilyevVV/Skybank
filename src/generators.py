@@ -9,7 +9,13 @@ def filter_by_currency(transactions: list, currency: str = "RUB") -> Iterator[di
     """
     for one_transaction in transactions:
         # Отбираем только те транзакции, в которых валюта операции соответствует заданной (например, "RUB").
-        if one_transaction.get("operationAmount", {}).get("currency", {}).get("code", "unknown") == currency:
+        if "operationAmount" in one_transaction:
+            # Для JSON-структуры
+            tx_currency = one_transaction.get("operationAmount", {}).get("currency", {}).get("code", "unknown")
+        # Для CSV и XLSX-структур
+        else:
+            tx_currency = one_transaction.get("currency_code")
+        if tx_currency == currency:
             yield one_transaction
 
 

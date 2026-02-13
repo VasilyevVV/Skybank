@@ -7,7 +7,6 @@ from src import masks
 from src.config import BASE_DIR_PRO
 from src.decorators import log
 
-
 TEST_LOG_FILE = os.path.join(BASE_DIR_PRO, "logs", "my_testlog.txt")
 
 
